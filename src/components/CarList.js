@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import axios from 'axios';
 
+import CarDetail from './CarDetail';
 class CarList extends Component {
     constructor(){
         super();
@@ -15,11 +16,18 @@ class CarList extends Component {
             this.setState({carList: response.data});
         });
     }
+
+    renderList = () => {
+        return this.state.carList.map((brand) => {
+            return <CarDetail key={brand.model[0].name} brand={brand} />;
+        });
+    };
+
     render() {
         console.log(this.state);
         return (
             <View>
-                <Text>Car List</Text>
+                {this.renderList()}
             </View>
         );
     }
